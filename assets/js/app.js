@@ -2,13 +2,16 @@
 const searchBox = document.querySelector('.search__box');
 const phonesContainer = document.querySelector('.phones__container');
 const phoneDetailContainer = document.querySelector('.phone__detail');
+const loadButton = document.querySelector('.load__btn');
+let newPhones = [];
+console.log(newPhones);
 //............................//
 //............................//
 
 //....Some utilities functions.....//
 //..Function of set error message as inner html..//
 const errorHandler = (error) => {
-    phonesContainer.innerHTML = `<h1 class="text-center mt-5">${error}</h1>`;
+    phonesContainer.innerHTML = `<h2 class="text-center mt-5">${error}</h2>`;
 };
 //............................//
 
@@ -35,7 +38,7 @@ const loadProducts = async () => {
     phonesContainer.textContent = '';
     phoneDetailContainer.textContent = '';
     if (searchBox.value === '') {
-        errorHandler('You typed nothing');
+        errorHandler('type something');
     } else {
         spinnerToggler('block');
         try {
@@ -43,9 +46,11 @@ const loadProducts = async () => {
             const response = await fetch(url);
             const data = await response.json();
             if (data.status) {
-                displayProducts(data.data);
+                displayProducts(data.data, true);
+                newPhones = data.data;
+                // console.log(newPhones);
             } else {
-                throw 'Nothing is found';
+                throw 'No result';
             }
         } catch (error) {
             errorHandler(error);
@@ -59,28 +64,58 @@ const loadProducts = async () => {
 
 
 // Function of Display Desired Phones //
-const displayProducts = phones => {
+const displayProducts = (phones, isTrue) => {
     phones = phones.slice(0, 20);
-    phones.forEach(phone => {
+    isTrue ?
+        phones.forEach(phone => {
+            // Destructuring data from phone //
+            const { brand, phone_name, slug, image } = phone;
+            const phoneDiv = document.createElement('div');
+            phoneDiv.classList.add('col-md-3');
+            phoneDiv.innerHTML = `
+            <div class="card border-0 mx-auto" style="width: 10rem;">
+                <img src="${image}" class="card-img-top" alt="${phone_name}">
+                <div class="card-body">
+                    <p class="card-text">${brand}</p>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="card-title">${phone_name}</h6>
+                        <a href="#header" onclick="loadPhoneDetail('${slug}')" class="card-text text-primary" style="text-decoration: none">
+                            Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+            `;
+            phonesContainer.appendChild(phoneDiv);
+            loadButton.innerHTML = `
+                <button onclick="displayProducts('false')" type="button" class="btn btn-outline-dark btn-sm">
+                    load more
+                </button>
+            `;
+        })
+        :   // load more product button functionalities //
+        phonesContainer.textContent = '';
+    newPhones.forEach(phone => {
         // Destructuring data from phone //
         const { brand, phone_name, slug, image } = phone;
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('col-md-3');
         phoneDiv.innerHTML = `
-        <div class="card border-0 mx-auto" style="width: 10rem;">
-            <img src="${image}" class="card-img-top" alt="${phone_name}">
-            <div class="card-body">
-                <p class="card-text">${brand}</p>
-                <div class="d-flex justify-content-between">
-                    <h6 class="card-title">${phone_name}</h6>
-                    <a href="#header" onclick="loadPhoneDetail('${slug}')" class="card-text text-primary" style="text-decoration: none">
-                        Detail
-                    </a>
+                <div class="card border-0 mx-auto" style="width: 10rem;">
+                    <img src="${image}" class="card-img-top" alt="${phone_name}">
+                    <div class="card-body">
+                        <p class="card-text">${brand}</p>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-title">${phone_name}</h6>
+                            <a href="#header" onclick="loadPhoneDetail('${slug}')" class="card-text text-primary" style="text-decoration: none">
+                                Detail
+                            </a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        `;
+                `;
         phonesContainer.appendChild(phoneDiv);
+        loadButton.innerHTML = '';
     });
 };
 //..........................................................//
@@ -116,30 +151,37 @@ const displayPhoneDetail = phone => {
     const phoneDetail = document.createElement('div');
     phoneDetail.innerHTML = `
     <div class="card mb-5 p-2 mx-auto" style="max-width: 1000px;">
-        <div class="row g-0">
-            <div class="col-md-3">
-                <img src="${image}" class="h-75 rounded-start" alt="${name}">
+        <div class="row text-center">
+            <div class="col-12">
+                <img src="${image}" class="img-fluid w-25 rounded-start" alt="${name}">
                 <h5 class="card-title text-muted m-2">${name}</h5>
                 <p class="card-text m-2">${releaseDate ? releaseDate : 'no release date'}</p>
             </div>
-            <div class="col-md-5">
+        </div>
+        <div class="row g-0">
+            <div class="col-md-6">
                 <div class="card-body">
-                    <h6 class="card-text"><strong>Specification</strong></h6>
-                    <p class="card-text">${chipSet}</p>
-                    <p class="card-text">${displaySize}</p>
-                    <p class="card-text">${memory}</p>
-                    <p class="card-text">${storage}</p>
+                    <ul>
+                        <h6 class="card-text"><strong>Specification</strong></h6>
+                        <li>Chipset: <small>${chipSet}</small></li>
+                        <li>Display: <small>${displaySize}</small></li>
+                        <li>RAM: <small>${memory}</small></li>
+                        <li>Storage: <small>${storage}</small></li>
+                        <li>Sensors: <small>${sensors ? sensors.join(', ') : 'Not available'}</small></li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card-body">
-                <h6 class="card-text"><strong>Others</strong></h6>
-                <p class="card-text">${Bluetooth}</p>
-                <p class="card-text">${GPS}</p>
-                <p class="card-text">${NFC}</p>
-                <p class="card-text">${Radio}</p>
-                <p class="card-text">${USB}</p>
-                <p class="card-text">${WLAN}</p>
+                    <ul>
+                        <h6 class="card-text"><strong>Others</strong></h6>
+                        <li>Bluetooth: <small>${Bluetooth ? Bluetooth : 'Not available'}</small></li>
+                        <li>GPS: <small>${GPS ? GPS : 'Not available'}</small></li>
+                        <li>NFC: <small>${NFC ? NFC : 'Not available'}</small></li>
+                        <li>FM: <small>${Radio ? Radio : 'Not available'}</small></li>
+                        <li>USB: <small>${USB ? USB : 'Not available'}</small></li>
+                        <li>WLAN: <small>${WLAN ? WLAN : 'Not available'}</small></li>
+                    </ul>
                 </div>
             </div>
         </div>
