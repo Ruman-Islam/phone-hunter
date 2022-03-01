@@ -72,16 +72,12 @@ const displayProducts = (products, isTrue) => {
             const productDiv = document.createElement('div');
             productDiv.classList.add('col-md-3');
             productDiv.innerHTML = `
-            <div class="card border-0 mx-auto" style="width: 10rem;">
+            <div class="card border-0 mx-auto mb-4" style="width: 10rem;">
                 <img src="${image}" class="card-img-top" alt="${phone_name}">
                 <div class="card-body">
                     <p class="card-text">${brand}</p>
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title">${phone_name}</h6>
-                        <a href="#header" onclick="loadproductDetail('${slug}')" class="card-text text-primary" style="text-decoration: none">
-                            Detail
-                        </a>
-                    </div>
+                    <h6 class="card-title">${phone_name}</h6>
+                    <a href="#header" onclick="loadproductDetail('${slug}')" style="text-decoration: none; text-align: center">Detail</a>
                 </div>
             </div>
             `;
@@ -102,18 +98,14 @@ const displayProducts = (products, isTrue) => {
         const productDiv = document.createElement('div');
         productDiv.classList.add('col-md-3');
         productDiv.innerHTML = `
-                <div class="card border-0 mx-auto" style="width: 10rem;">
-                    <img src="${image}" class="card-img-top" alt="${phone_name}">
-                    <div class="card-body">
-                        <p class="card-text">${brand}</p>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title">${phone_name}</h6>
-                            <a href="#header" onclick="loadproductDetail('${slug}')" class="card-text text-primary" style="text-decoration: none">
-                                Detail
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <div class="card border-0 mx-auto mb-4" style="width: 10rem;">
+            <img src="${image}" class="card-img-top" alt="${phone_name}">
+            <div class="card-body">
+                <p class="card-text">${brand}</p>
+                <h6 class="card-title">${phone_name}</h6>
+                <a href="#header" onclick="loadproductDetail('${slug}')" style="text-decoration: none; text-align: center">Detail</a>
+            </div>
+        </div>
                 `;
         productsContainer.appendChild(productDiv);
         loadButton.innerHTML = '';
