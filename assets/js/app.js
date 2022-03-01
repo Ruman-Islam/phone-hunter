@@ -38,6 +38,7 @@ const searchWithEnter = e => {
 // Function of Load all Phones
 const loadProducts = async () => {
     phonesContainer.textContent = '';
+    phoneDetailContainer.textContent = '';
     if (searchBox.value === '') {
         errorHandler('You typed nothing');
     } else {
@@ -71,15 +72,15 @@ const displayProducts = phones => {
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('col-md-3');
         phoneDiv.innerHTML = `
-        <div class="card border-0 mx-auto" style="width: 14rem;">
-            <img src="${image}" class="card-img-top" alt="...">
+        <div class="card border-0 mx-auto" style="width: 10rem;">
+            <img src="${image}" class="card-img-top" alt="${phone_name}">
             <div class="card-body">
                 <p class="card-text">${brand}</p>
                 <div class="d-flex justify-content-between">
                     <h6 class="card-title">${phone_name}</h6>
-                    <p onclick="loadPhoneDetail('${slug}')" class="card-text text-primary" style="cursor: pointer">
-                        more
-                    </p>
+                    <a href="#header" onclick="loadPhoneDetail('${slug}')" class="card-text text-primary" style="text-decoration: none">
+                        Detail
+                    </a>
                 </div>
             </div>
         </div>
@@ -106,22 +107,41 @@ const loadPhoneDetail = async id => {
         errorHandler(error);
     }
 };
+//............................//
 
+
+// Function of display phone details
 const displayPhoneDetail = (data) => {
-    const { brand, image, mainFeatures, name, releaseDate, others } = data;
-    console.log(brand, image, mainFeatures, name, releaseDate, others);
+    const { image, name, releaseDate,
+        mainFeatures: { chipSet, displaySize, memory, sensors, storage } = {},
+        others: { Bluetooth, GPS, NFC, Radio, USB, WLAN } = {} } = data;
     const phoneDetail = document.createElement('div');
     phoneDetail.innerHTML = `
-    <div class="card border-0 mb-3" style="max-width: 540px;">
+    <div class="card mb-5 p-2 mx-auto" style="max-width: 1000px;">
         <div class="row g-0">
-            <div class="col-md-4">
-            <img src="${image}" class="img-fluid rounded-start" alt="...">
+            <div class="col-md-3">
+                <img src="${image}" class="h-75 rounded-start" alt="${name}">
+                <h5 class="card-title text-muted m-3">${name}</h5>
+                <p class="card-text m-3">${releaseDate ? releaseDate : 'no release date'}</p>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <div class="card-body">
-                    <h5 class="card-title">${name}</h5>
-                    <p class="card-text">${releaseDate}</p>
-                    <p class="card-text"></p>
+                    <h6 class="card-text"><strong>Specification</strong></h6>
+                    <p class="card-text">${chipSet}</p>
+                    <p class="card-text">${displaySize}</p>
+                    <p class="card-text">${memory}</p>
+                    <p class="card-text">${storage}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-body">
+                <h6 class="card-text"><strong>Others</strong></h6>
+                <p class="card-text">${Bluetooth}</p>
+                <p class="card-text">${GPS}</p>
+                <p class="card-text">${NFC}</p>
+                <p class="card-text">${Radio}</p>
+                <p class="card-text">${USB}</p>
+                <p class="card-text">${WLAN}</p>
                 </div>
             </div>
         </div>
@@ -129,3 +149,4 @@ const displayPhoneDetail = (data) => {
     `;
     phoneDetailContainer.appendChild(phoneDetail);
 };
+//............................//
