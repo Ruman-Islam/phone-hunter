@@ -6,6 +6,7 @@
   }
 /* ....... */
 
+/* Some basic styles */
 body {
     font-family: 'Poppins', sans-serif;
 }
@@ -21,3 +22,5 @@ small {
 li {
     list-style: none;
 }
+
+/* Thank You */
