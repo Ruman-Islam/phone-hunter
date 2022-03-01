@@ -1,25 +1,17 @@
-// Some useful variables
+// Some useful variables //
 const searchBox = document.querySelector('.search__box');
 const phonesContainer = document.querySelector('.phones__container');
 const phoneDetailContainer = document.querySelector('.phone__detail');
 //............................//
+//............................//
 
-//..Some utilities functions..//
+//....Some utilities functions.....//
 //..Function of set error message as inner html..//
 const errorHandler = (error) => {
     phonesContainer.innerHTML = `<h1 class="text-center mt-5">${error}</h1>`;
 };
 //............................//
 
-//............................//
-// const clearPreviousData = (param) => {
-//     if (param) {
-//         phonesContainer.textContent = '';
-//     } else {
-//         phoneDetail.textContent = '';
-//     }
-// };
-//............................//
 
 //..Loading spinner toggler..//
 const spinnerToggler = (style) => {
@@ -27,15 +19,18 @@ const spinnerToggler = (style) => {
 };
 //............................//
 
-//..Enter Search..//
+
+//.......Search Enter Button........//
 const searchWithEnter = e => {
     if (e.keyCode === 13) {
         loadProducts();
     }
 };
 //............................//
+//....Some Utilities Functions End.....//
 
-// Function of Load all Phones
+
+// Function of Load all Phones //
 const loadProducts = async () => {
     phonesContainer.textContent = '';
     phoneDetailContainer.textContent = '';
@@ -60,15 +55,15 @@ const loadProducts = async () => {
     searchBox.value = '';
 };
 //............................//
+//............................//
 
 
-// Function of Display Desired Phones
+// Function of Display Desired Phones //
 const displayProducts = phones => {
     phones = phones.slice(0, 20);
     phones.forEach(phone => {
-        // Destructuring here from phone
+        // Destructuring data from phone //
         const { brand, phone_name, slug, image } = phone;
-        // console.log(slug);
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('col-md-3');
         phoneDiv.innerHTML = `
@@ -88,14 +83,15 @@ const displayProducts = phones => {
         phonesContainer.appendChild(phoneDiv);
     });
 };
-//............................//
+//..........................................................//
+//..........................................................//
 
 
-// More details function
-const loadPhoneDetail = async id => {
+// Load Details function //
+const loadPhoneDetail = async slug => {
     phoneDetailContainer.textContent = '';
     try {
-        const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+        const url = `https://openapi.programming-hero.com/api/phone/${slug}`;
         const response = await fetch(url);
         const data = await response.json();
         if (data.status) {
@@ -107,22 +103,24 @@ const loadPhoneDetail = async id => {
         errorHandler(error);
     }
 };
-//............................//
+//.....................................//
+//.....................................//
 
 
-// Function of display phone details
-const displayPhoneDetail = (data) => {
+// Function of display phone details //
+const displayPhoneDetail = phone => {
+    // Destructuring data from phone //
     const { image, name, releaseDate,
         mainFeatures: { chipSet, displaySize, memory, sensors, storage } = {},
-        others: { Bluetooth, GPS, NFC, Radio, USB, WLAN } = {} } = data;
+        others: { Bluetooth, GPS, NFC, Radio, USB, WLAN } = {} } = phone;
     const phoneDetail = document.createElement('div');
     phoneDetail.innerHTML = `
     <div class="card mb-5 p-2 mx-auto" style="max-width: 1000px;">
         <div class="row g-0">
             <div class="col-md-3">
                 <img src="${image}" class="h-75 rounded-start" alt="${name}">
-                <h5 class="card-title text-muted m-3">${name}</h5>
-                <p class="card-text m-3">${releaseDate ? releaseDate : 'no release date'}</p>
+                <h5 class="card-title text-muted m-2">${name}</h5>
+                <p class="card-text m-2">${releaseDate ? releaseDate : 'no release date'}</p>
             </div>
             <div class="col-md-5">
                 <div class="card-body">
@@ -149,4 +147,5 @@ const displayPhoneDetail = (data) => {
     `;
     phoneDetailContainer.appendChild(phoneDetail);
 };
-//............................//
+//.......................................................//
+//.......................................................//
