@@ -6,9 +6,9 @@
   }
 /* ....... */
 
-/* body {
+body {
     font-family: 'Poppins', sans-serif;
-} */
+}
 html {
     scroll-behavior: smooth;
 }
@@ -17,4 +17,7 @@ html {
 }
 small {
     color: var(--primary-color);
+}
+li {
+    list-style: none;
 }
