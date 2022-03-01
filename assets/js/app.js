@@ -85,11 +85,13 @@ const displayProducts = (phones, isTrue) => {
             </div>
             `;
             phonesContainer.appendChild(phoneDiv);
-            loadButton.innerHTML = `
-                <button onclick="displayProducts('false')" type="button" class="btn btn-outline-dark btn-sm">
-                    load more
-                </button>
-            `;
+            if (phones.length > 20) {
+                loadButton.innerHTML = `
+                    <button onclick="displayProducts('false')" type="button" class="btn btn-outline-dark btn-sm">
+                        load more
+                    </button>
+                `;
+            }
         })
         :   // load more product button functionalities //
         phonesContainer.textContent = '';
