@@ -4,7 +4,6 @@ const phonesContainer = document.querySelector('.phones__container');
 const phoneDetailContainer = document.querySelector('.phone__detail');
 const loadButton = document.querySelector('.load__btn');
 let newPhones = [];
-console.log(newPhones);
 //............................//
 //............................//
 
@@ -48,9 +47,8 @@ const loadProducts = async () => {
             if (data.status) {
                 displayProducts(data.data, true);
                 newPhones = data.data;
-                // console.log(newPhones);
             } else {
-                throw 'No result';
+                throw 'No result found';
             }
         } catch (error) {
             errorHandler(error);
