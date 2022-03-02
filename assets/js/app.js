@@ -11,7 +11,8 @@ let totalProducts = [];
 //....Utility functions.....//
 //..Function of set dynamically error message as inner html..//
 const errorHandler = error => {
-    productsContainer.innerHTML = `<h2 class="text-center mt-5">${error}</h2>`;
+    console.log(error);
+    productsContainer.innerHTML = `${error}`;
     showAllButton.innerHTML = '';
 };
 //............................//
@@ -40,7 +41,7 @@ const loadProducts = async () => {
     productDetailContainer.textContent = '';
     if (searchBox.value === '') {  // While search box is empty
         errorHandler('');
-        errorHandler('type something');
+        errorHandler('<h2 class="text-success text-center">Type something</h2>');
     } else {
         spinnerToggler('block');
         try {
@@ -53,10 +54,11 @@ const loadProducts = async () => {
                 totalProducts = data.data;  // Storing all products for show all
             } else {
                 errorHandler('');
-                throw 'No result found';
+                throw '<h2 class="text-center mt-5"><span style="color: #1B98F5">Opps!</span> No result found</h2>';
             }
         } catch (error) {
             errorHandler(error);
+            console.log(error);
         }
         spinnerToggler('none');
     }
