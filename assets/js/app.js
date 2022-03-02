@@ -2,17 +2,17 @@
 const searchBox = document.querySelector('.search__box');
 const productsContainer = document.querySelector('.products__container');
 const productDetailContainer = document.querySelector('.product__detail');
-const loadButton = document.querySelector('.load__btn');
+const showAllButton = document.querySelector('.show__all');
+const toast = document.querySelector('.toast');
 let totalProducts = [];
 //............................//
 //............................//
 
-//....Some utilities functions.....//
-//..Function of set error message as inner html..//
+//....Utility functions.....//
+//..Function of set dynamically error message as inner html..//
 const errorHandler = error => {
     productsContainer.innerHTML = `<h2 class="text-center mt-5">${error}</h2>`;
-    loadButton.innerHTML = '';
-
+    showAllButton.innerHTML = '';
 };
 //............................//
 
@@ -20,25 +20,25 @@ const errorHandler = error => {
 //..Loading spinner toggler..//
 const spinnerToggler = (style) => {
     document.querySelector('.spinner').style.display = style;
-};
+};  // While data is loading 
 //............................//
 
 
 //.......Search with Enter Button........//
-const searchWithEnter = e => {
-    if (e.keyCode === 13) {
+const searchWithEnter = e => {   // Type product name in the search box &
+    if (e.keyCode === 13) {   // hit the enter button for search
         loadProducts();
     }
 };
 //............................//
-//....Some Utilities Functions End.....//
+//.....................................//
 
 
-// Function of Load all Phones //
+// Function of load all products //
 const loadProducts = async () => {
     errorHandler('');
     productDetailContainer.textContent = '';
-    if (searchBox.value === '') {
+    if (searchBox.value === '') {  // When search box is empty
         errorHandler('');
         errorHandler('type something');
     } else {
@@ -48,8 +48,9 @@ const loadProducts = async () => {
             const response = await fetch(url);
             const data = await response.json();
             if (data.status) {
+                toast.classList.add('show');
                 displayProducts(data.data, true);
-                totalProducts = data.data;
+                totalProducts = data.data;  // Storing all products for show all
             } else {
                 errorHandler('');
                 throw 'No result found';
@@ -65,22 +66,24 @@ const loadProducts = async () => {
 //............................//
 
 
-// Function of Display Desired Phones //
+// Function of display desired products //
 const displayProducts = (products, isTrue) => {
-    let isFalse;
+    let isShowAll;
     if (isTrue) {
-        products = products.slice(0, 20);
-        isFalse = true;
+        products = products.slice(0, 20);  // Load 20 products
+        isShowAll = true;
     } else {
-        isFalse = false;
+        isShowAll = false;
         errorHandler('');
-        products = totalProducts;  // load all products 
+        products = totalProducts;  // Load all products 
     }
     products.forEach(product => {
-        // Destructuring data from phone //
+        // Destructuring data from product //
         const { brand, phone_name, slug, image } = product;
         const productDiv = document.createElement('div');
         productDiv.classList.add('col-md-4');
+
+        // A simple product card //
         productDiv.innerHTML = `
             <div class="card border-0 mx-auto mb-4" style="width: 13rem;">
                 <img src="${image}" class="card-img-top" alt="${phone_name}">
@@ -98,22 +101,23 @@ const displayProducts = (products, isTrue) => {
             `;
         productsContainer.appendChild(productDiv);
     });
-    if (isFalse === true) {
-        loadButton.innerHTML = `
+    // Condition for show all button or not //
+    if (isShowAll === true) {
+        showAllButton.innerHTML = `
                 <button onclick="displayProducts('false')" type="button" class="btn btn-outline-dark btn-sm">
                     Show all
                 </button>
             `;
     } else {
         totalProducts = [];
-        loadButton.innerHTML = '';
+        showAllButton.innerHTML = '';
     }
 };
 //..........................................................//
 //..........................................................//
 
 
-// Load Details function //
+// Function of load product details //
 const loadproductDetail = async slug => {
     productDetailContainer.textContent = '';
     try {
@@ -133,12 +137,14 @@ const loadproductDetail = async slug => {
 //.....................................//
 
 
-// Function of display phone details //
+// Function of display product details //
 const displayProductDetail = product => {
-    // Destructuring data from phone //
+    // Destructuring data from product //
     const { image, name, releaseDate,
         mainFeatures: { chipSet, displaySize, memory, sensors, storage } = {},
         others: { Bluetooth, GPS, NFC, Radio, USB, WLAN } = {} } = product;
+
+    // A simple card of product details //
     const productDetail = document.createElement('div');
     productDetail.innerHTML = `
     <div class="card mb-5 p-2 mx-auto" style="max-width: 1000px;">

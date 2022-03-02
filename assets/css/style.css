@@ -1,5 +1,6 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,300&display=swap');
+
 /* Primary Color */
 :root {
     --primary-color: #1B98F5;
@@ -7,11 +8,11 @@
 /* ....... */
 
 /* Some basic styles */
-body {
-    font-family: 'Poppins', sans-serif;
-}
 html {
     scroll-behavior: smooth;
+}
+body {
+    font-family: 'Poppins', sans-serif;
 }
 .spinner {
     display: none;
