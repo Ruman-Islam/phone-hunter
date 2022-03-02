@@ -17,9 +17,6 @@ body {
 .spinner {
     display: none;
 }
-small {
-    color: var(--primary-color);
-}
 li {
     list-style: none;
 }

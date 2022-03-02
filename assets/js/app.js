@@ -147,31 +147,29 @@ const displayProductDetail = product => {
     // A simple card of product details //
     const productDetail = document.createElement('div');
     productDetail.innerHTML = `
-        <div class="row mb-5 border-3 rounded">
-            <div class="col-md-3 p-2">
-                <img src="${image}" class="img-fluid w-100 rounded-start" alt="${name}">
-            </div>
+        <div class="row mb-5">
             <div class="card col-md-5 p-2">
-                <ul>
-                    <h2 class="card-title text-muted">${name}</h2>
-                    <p class="card-text">${releaseDate ? releaseDate : 'no release date'}</p>
-                    <h6 class="card-text mt-5"><strong>Specification</strong></h6>
-                    <li>Chipset: <small>${chipSet ? chipSet : 'Not available'}</small></li>
-                    <li>Display: <small>${displaySize ? displaySize : 'Not available'}</small></li>
-                    <li>RAM: <small>${memory ? memory : 'Not available'}</small></li>
-                    <li>Storage: <small>${storage ? storage : 'Not available'}</small></li>
-                    <li>Sensors: <small>${sensors ? sensors.join(', ') : 'Not available'}</small></li>
-                </ul>
+                <img src="${image}" class="img-fluid w-75 rounded-start" alt="${name}">
+                <h2 class="card-title text-muted m-2">${name}</h2>
+                <h6 class="card-text text-muted m-2">Release Date: <small>${releaseDate ? releaseDate : 'Not available'}</small></h6>
             </div>
-            <div class="card col-md-4 p-2">
+            <div class="card col-md-7 p-2">
                 <ul>
-                    <h6 class="card-text mt-5"><strong>Others</strong></h6>
-                    <li>Bluetooth: <small>${Bluetooth ? Bluetooth : 'Not available'}</small></li>
-                    <li>GPS: <small>${GPS ? GPS : 'Not available'}</small></li>
-                    <li>NFC: <small>${NFC ? NFC : 'Not available'}</small></li>
-                    <li>FM: <small>${Radio ? Radio : 'Not available'}</small></li>
-                    <li>USB: <small>${USB ? USB : 'Not available'}</small></li>
-                    <li>WLAN: <small>${WLAN ? WLAN : 'Not available'}</small></li>
+                    <h5 class="card-text text-muted mt-5"><strong>Specification</strong></h5>
+                    <li><strong>Chipset:</strong> <small>${chipSet ? chipSet : 'Not available'}</small></li>
+                    <li><strong>Display:</strong> <small>${displaySize ? displaySize : 'Not available'}</small></li>
+                    <li><strong>RAM:</strong> <small>${memory ? memory : 'Not available'}</small></li>
+                    <li><strong>Storage:</strong> <small>${storage ? storage : 'Not available'}</small></li>
+                    <li><strong>Sensors:</strong> <small>${sensors ? sensors.join(', ') : 'Not available'}</small></li>
+                </ul>
+                <ul>
+                    <h5 class="card-text text-muted mt-5"><strong>Others</strong></h5>
+                    <li><strong>Bluetooth:</strong> <small>${Bluetooth ? Bluetooth : 'Not available'}</small></li>
+                    <li><strong>GPS:</strong> <small>${GPS ? GPS : 'Not available'}</small></li>
+                    <li><strong>NFC:</strong> <small>${NFC ? NFC : 'Not available'}</small></li>
+                    <li><strong>FM:</strong> <small>${Radio ? Radio : 'Not available'}</small></li>
+                    <li><strong>USB:</strong> <small>${USB ? USB : 'Not available'}</small></li>
+                    <li><strong>WLAN:</strong> <small>${WLAN ? WLAN : 'Not available'}</small></li>
                 </ul>
             </div>
         </div>
