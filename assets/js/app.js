@@ -38,7 +38,7 @@ const searchWithEnter = e => {   // Type product name in the search box &
 const loadProducts = async () => {
     errorHandler('');
     productDetailContainer.textContent = '';
-    if (searchBox.value === '') {  // When search box is empty
+    if (searchBox.value === '') {  // While search box is empty
         errorHandler('');
         errorHandler('type something');
     } else {
@@ -147,25 +147,25 @@ const displayProductDetail = product => {
     // A simple card of product details //
     const productDetail = document.createElement('div');
     productDetail.innerHTML = `
-    <div class="card mb-5 p-2 mx-auto" style="max-width: 1000px;">
-        <div class="row text-center">
-            <div class="col-12">
-                <img src="${image}" class="img-fluid w-25 rounded-start" alt="${name}">
-                <h5 class="card-title text-muted m-2">${name}</h5>
-                <p class="card-text m-2">${releaseDate ? releaseDate : 'no release date'}</p>
+        <div class="row mb-5 border-3 rounded bg-light">
+            <div class="col-md-3 p-2">
+                <img src="${image}" class="img-fluid w-100 rounded-start" alt="${name}">
             </div>
-        </div>
-            <div class="card-body text-center">
+            <div class="card col-md-5 p-2">
                 <ul>
-                    <h6 class="card-text"><strong>Specification</strong></h6>
+                    <h2 class="card-title text-muted">${name}</h2>
+                    <p class="card-text">${releaseDate ? releaseDate : 'no release date'}</p>
+                    <h6 class="card-text mt-5"><strong>Specification</strong></h6>
                     <li>Chipset: <small>${chipSet ? chipSet : 'No'}</small></li>
                     <li>Display: <small>${displaySize ? displaySize : 'No'}</small></li>
                     <li>RAM: <small>${memory ? memory : 'No'}</small></li>
                     <li>Storage: <small>${storage ? storage : 'No'}</small></li>
                     <li>Sensors: <small>${sensors ? sensors.join(', ') : 'No'}</small></li>
                 </ul>
+            </div>
+            <div class="card col-md-4 p-2">
                 <ul>
-                    <h6 class="card-text"><strong>Others</strong></h6>
+                    <h6 class="card-text mt-5"><strong>Others</strong></h6>
                     <li>Bluetooth: <small>${Bluetooth ? Bluetooth : 'No'}</small></li>
                     <li>GPS: <small>${GPS ? GPS : 'No'}</small></li>
                     <li>NFC: <small>${NFC ? NFC : 'No'}</small></li>
@@ -174,7 +174,7 @@ const displayProductDetail = product => {
                     <li>WLAN: <small>${WLAN ? WLAN : 'No'}</small></li>
                 </ul>
             </div>
-    </div>
+        </div>
     `;
     productDetailContainer.appendChild(productDetail);
 };
