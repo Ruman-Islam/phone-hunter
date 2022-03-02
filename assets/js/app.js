@@ -157,7 +157,7 @@ const displayProductDetail = product => {
             <div class="card col-md-5 p-2">
                 <img src="${image}" class="img-fluid w-75 rounded-start" alt="${name}">
                 <h2 class="card-title text-muted m-3">${name}</h2>
-                <h6 class="card-text text-muted m-3">Release Date: <small>${releaseDate ? releaseDate : 'Not available'}</small></h6>
+                <h6 class="card-text text-muted ms-3">Release Date: <small>${releaseDate ? releaseDate : 'Not available'}</small></h6>
             </div>
             <div class="card col-md-7 p-2">
                 <ul>
