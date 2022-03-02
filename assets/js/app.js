@@ -147,7 +147,7 @@ const displayProductDetail = product => {
     // A simple card of product details //
     const productDetail = document.createElement('div');
     productDetail.innerHTML = `
-        <div class="row mb-5 border-3 rounded bg-light">
+        <div class="row mb-5 border-3 rounded">
             <div class="col-md-3 p-2">
                 <img src="${image}" class="img-fluid w-100 rounded-start" alt="${name}">
             </div>
