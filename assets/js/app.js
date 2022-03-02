@@ -101,7 +101,7 @@ const displayProducts = (products, isTrue) => {
     if (isFalse === true) {
         loadButton.innerHTML = `
                 <button onclick="displayProducts('false')" type="button" class="btn btn-outline-dark btn-sm">
-                    load more
+                    Show all
                 </button>
             `;
     } else {
