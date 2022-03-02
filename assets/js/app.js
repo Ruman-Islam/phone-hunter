@@ -24,7 +24,7 @@ const spinnerToggler = (style) => {
 //............................//
 
 
-//.......Search Enter Button........//
+//.......Search with Enter Button........//
 const searchWithEnter = e => {
     if (e.keyCode === 13) {
         loadProducts();
