@@ -81,21 +81,27 @@ const displayProducts = (products, isTrue) => {
         // Destructuring data from product //
         const { brand, phone_name, slug, image } = product;
         const productDiv = document.createElement('div');
-        productDiv.classList.add('col-md-4');
+        productDiv.classList.add('col-md-3');
 
         // A simple product card //
         productDiv.innerHTML = `
             <div class="card border-0 mx-auto mb-4" style="width: 13rem;">
                 <img src="${image}" class="card-img-top" alt="${phone_name}">
                 <div class="card-body">
-                    <p class="card-text">${brand}</p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text">${brand}</p>
+                        <a
+                            href="#products__container"
+                            onclick="loadproductDetail('${slug}')" 
+                            style="text-decoration: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px"
+                            class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                            </svg>
+                            more
+                        </a>
+                    </div>
                     <h6 class="card-title">${phone_name}</h6>
-                    <a
-                        href="#products__container"
-                        onclick="loadproductDetail('${slug}')" 
-                        style="text-decoration: none; text-align: center">
-                        Detail
-                    </a>
                 </div>
             </div>
             `;

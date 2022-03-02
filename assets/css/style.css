@@ -8,6 +8,11 @@
 /* ....... */
 
 /* Some basic styles */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 html {
     scroll-behavior: smooth;
 }
@@ -20,7 +25,9 @@ body {
 li {
     list-style: none;
 }
-
+a{
+    color: var(--primary-color) !important;
+}
 .header {
     position: relative;
 }
@@ -29,12 +36,13 @@ li {
     left: 450px;
     right: 0;
     z-index: 5;
+    color: var(--primary-color);
 }
 
 /* Mobile version for toast  */
 @media (max-width: 540px) {
     #toast {
-        left: 20px;
+        left: 15px;
     }
 }
 
