@@ -21,4 +21,21 @@ li {
     list-style: none;
 }
 
+.header {
+    position: relative;
+}
+#toast {
+    position: absolute;
+    left: 450px;
+    right: 0;
+    z-index: 5;
+}
+
+/* Mobile version for toast  */
+@media (max-width: 540px) {
+    #toast {
+        left: 20px;
+    }
+}
+
 /* Thank You */

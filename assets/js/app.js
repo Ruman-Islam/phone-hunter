@@ -150,8 +150,8 @@ const displayProductDetail = product => {
         <div class="row mb-5">
             <div class="card col-md-5 p-2">
                 <img src="${image}" class="img-fluid w-75 rounded-start" alt="${name}">
-                <h2 class="card-title text-muted m-2">${name}</h2>
-                <h6 class="card-text text-muted m-2">Release Date: <small>${releaseDate ? releaseDate : 'Not available'}</small></h6>
+                <h2 class="card-title text-muted m-3">${name}</h2>
+                <h6 class="card-text text-muted m-3">Release Date: <small>${releaseDate ? releaseDate : 'Not available'}</small></h6>
             </div>
             <div class="card col-md-7 p-2">
                 <ul>
@@ -163,7 +163,7 @@ const displayProductDetail = product => {
                     <li><strong>Sensors:</strong> <small>${sensors ? sensors.join(', ') : 'Not available'}</small></li>
                 </ul>
                 <ul>
-                    <h5 class="card-text text-muted mt-5"><strong>Others</strong></h5>
+                    <h5 class="card-text text-muted mt-5"><strong>Other Features</strong></h5>
                     <li><strong>Bluetooth:</strong> <small>${Bluetooth ? Bluetooth : 'Not available'}</small></li>
                     <li><strong>GPS:</strong> <small>${GPS ? GPS : 'Not available'}</small></li>
                     <li><strong>NFC:</strong> <small>${NFC ? NFC : 'Not available'}</small></li>
