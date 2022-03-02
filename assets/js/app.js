@@ -87,7 +87,12 @@ const displayProducts = (products, isTrue) => {
                 <div class="card-body">
                     <p class="card-text">${brand}</p>
                     <h6 class="card-title">${phone_name}</h6>
-                    <a href="#products__container" onclick="loadproductDetail('${slug}')" style="text-decoration: none; text-align: center">Detail</a>
+                    <a
+                        href="#products__container"
+                        onclick="loadproductDetail('${slug}')" 
+                        style="text-decoration: none; text-align: center">
+                        Detail
+                    </a>
                 </div>
             </div>
             `;
