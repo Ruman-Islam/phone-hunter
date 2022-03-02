@@ -80,9 +80,9 @@ const displayProducts = (products, isTrue) => {
         // Destructuring data from phone //
         const { brand, phone_name, slug, image } = product;
         const productDiv = document.createElement('div');
-        productDiv.classList.add('col-md-3');
+        productDiv.classList.add('col-md-4');
         productDiv.innerHTML = `
-            <div class="card border-0 mx-auto mb-4" style="width: 10rem;">
+            <div class="card border-0 mx-auto mb-4" style="width: 13rem;">
                 <img src="${image}" class="card-img-top" alt="${phone_name}">
                 <div class="card-body">
                     <p class="card-text">${brand}</p>
