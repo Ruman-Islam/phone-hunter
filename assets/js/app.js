@@ -9,9 +9,10 @@ let totalProducts = [];
 
 //....Some utilities functions.....//
 //..Function of set error message as inner html..//
-const errorHandler = (error) => {
+const errorHandler = error => {
     productsContainer.innerHTML = `<h2 class="text-center mt-5">${error}</h2>`;
     loadButton.innerHTML = '';
+
 };
 //............................//
 
@@ -38,6 +39,7 @@ const loadProducts = async () => {
     errorHandler('');
     productDetailContainer.textContent = '';
     if (searchBox.value === '') {
+        errorHandler('');
         errorHandler('type something');
     } else {
         spinnerToggler('block');
@@ -49,6 +51,7 @@ const loadProducts = async () => {
                 displayProducts(data.data, true);
                 totalProducts = data.data;
             } else {
+                errorHandler('');
                 throw 'No result found';
             }
         } catch (error) {
@@ -64,52 +67,42 @@ const loadProducts = async () => {
 
 // Function of Display Desired Phones //
 const displayProducts = (products, isTrue) => {
-    products = products.slice(0, 20);
-    isTrue ?
-        products.forEach(product => {
-            // Destructuring data from phone //
-            const { brand, phone_name, slug, image } = product;
-            const productDiv = document.createElement('div');
-            productDiv.classList.add('col-md-3');
-            productDiv.innerHTML = `
-            <div class="card border-0 mx-auto mb-4" style="width: 10rem;">
-                <img src="${image}" class="card-img-top" alt="${phone_name}">
-                <div class="card-body">
-                    <p class="card-text">${brand}</p>
-                    <h6 class="card-title">${phone_name}</h6>
-                    <a href="#header" onclick="loadproductDetail('${slug}')" style="text-decoration: none; text-align: center">Detail</a>
-                </div>
-            </div>
-            `;
-            productsContainer.appendChild(productDiv);
-            loadButton.innerHTML = `
-                    <button onclick="displayProducts('false')" type="button" class="btn btn-outline-dark btn-sm">
-                        load more
-                    </button>
-                `;
-            totalProducts = [];
-
-        })
-        :   // load more product button functionalities //
+    let isFalse;
+    if (isTrue) {
+        products = products.slice(0, 20);
+        isFalse = true;
+    } else {
+        isFalse = false;
         errorHandler('');
-    totalProducts.forEach(product => {
+        products = totalProducts;  // load all products 
+    }
+    products.forEach(product => {
         // Destructuring data from phone //
         const { brand, phone_name, slug, image } = product;
         const productDiv = document.createElement('div');
         productDiv.classList.add('col-md-3');
         productDiv.innerHTML = `
-        <div class="card border-0 mx-auto mb-4" style="width: 10rem;">
-            <img src="${image}" class="card-img-top" alt="${phone_name}">
-            <div class="card-body">
-                <p class="card-text">${brand}</p>
-                <h6 class="card-title">${phone_name}</h6>
-                <a href="#header" onclick="loadproductDetail('${slug}')" style="text-decoration: none; text-align: center">Detail</a>
+            <div class="card border-0 mx-auto mb-4" style="width: 10rem;">
+                <img src="${image}" class="card-img-top" alt="${phone_name}">
+                <div class="card-body">
+                    <p class="card-text">${brand}</p>
+                    <h6 class="card-title">${phone_name}</h6>
+                    <a href="#products__container" onclick="loadproductDetail('${slug}')" style="text-decoration: none; text-align: center">Detail</a>
+                </div>
             </div>
-        </div>
-                `;
+            `;
         productsContainer.appendChild(productDiv);
-        loadButton.innerHTML = '';
     });
+    if (isFalse === true) {
+        loadButton.innerHTML = `
+                <button onclick="displayProducts('false')" type="button" class="btn btn-outline-dark btn-sm">
+                    load more
+                </button>
+            `;
+    } else {
+        totalProducts = [];
+        loadButton.innerHTML = '';
+    }
 };
 //..........................................................//
 //..........................................................//
@@ -154,20 +147,20 @@ const displayProductDetail = product => {
             <div class="card-body text-center">
                 <ul>
                     <h6 class="card-text"><strong>Specification</strong></h6>
-                    <li>Chipset: <small>${chipSet}</small></li>
-                    <li>Display: <small>${displaySize}</small></li>
-                    <li>RAM: <small>${memory}</small></li>
-                    <li>Storage: <small>${storage}</small></li>
-                    <li>Sensors: <small>${sensors ? sensors.join(', ') : 'Not available'}</small></li>
+                    <li>Chipset: <small>${chipSet ? chipSet : 'No'}</small></li>
+                    <li>Display: <small>${displaySize ? displaySize : 'No'}</small></li>
+                    <li>RAM: <small>${memory ? memory : 'No'}</small></li>
+                    <li>Storage: <small>${storage ? storage : 'No'}</small></li>
+                    <li>Sensors: <small>${sensors ? sensors.join(', ') : 'No'}</small></li>
                 </ul>
                 <ul>
                     <h6 class="card-text"><strong>Others</strong></h6>
-                    <li>Bluetooth: <small>${Bluetooth ? Bluetooth : 'Not available'}</small></li>
-                    <li>GPS: <small>${GPS ? GPS : 'Not available'}</small></li>
-                    <li>NFC: <small>${NFC ? NFC : 'Not available'}</small></li>
-                    <li>FM: <small>${Radio ? Radio : 'Not available'}</small></li>
-                    <li>USB: <small>${USB ? USB : 'Not available'}</small></li>
-                    <li>WLAN: <small>${WLAN ? WLAN : 'Not available'}</small></li>
+                    <li>Bluetooth: <small>${Bluetooth ? Bluetooth : 'No'}</small></li>
+                    <li>GPS: <small>${GPS ? GPS : 'No'}</small></li>
+                    <li>NFC: <small>${NFC ? NFC : 'No'}</small></li>
+                    <li>FM: <small>${Radio ? Radio : 'No'}</small></li>
+                    <li>USB: <small>${USB ? USB : 'No'}</small></li>
+                    <li>WLAN: <small>${WLAN ? WLAN : 'No'}</small></li>
                 </ul>
             </div>
     </div>
