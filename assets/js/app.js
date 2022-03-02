@@ -156,22 +156,22 @@ const displayProductDetail = product => {
                     <h2 class="card-title text-muted">${name}</h2>
                     <p class="card-text">${releaseDate ? releaseDate : 'no release date'}</p>
                     <h6 class="card-text mt-5"><strong>Specification</strong></h6>
-                    <li>Chipset: <small>${chipSet ? chipSet : 'No'}</small></li>
-                    <li>Display: <small>${displaySize ? displaySize : 'No'}</small></li>
-                    <li>RAM: <small>${memory ? memory : 'No'}</small></li>
-                    <li>Storage: <small>${storage ? storage : 'No'}</small></li>
-                    <li>Sensors: <small>${sensors ? sensors.join(', ') : 'No'}</small></li>
+                    <li>Chipset: <small>${chipSet ? chipSet : 'Not available'}</small></li>
+                    <li>Display: <small>${displaySize ? displaySize : 'Not available'}</small></li>
+                    <li>RAM: <small>${memory ? memory : 'Not available'}</small></li>
+                    <li>Storage: <small>${storage ? storage : 'Not available'}</small></li>
+                    <li>Sensors: <small>${sensors ? sensors.join(', ') : 'Not available'}</small></li>
                 </ul>
             </div>
             <div class="card col-md-4 p-2">
                 <ul>
                     <h6 class="card-text mt-5"><strong>Others</strong></h6>
-                    <li>Bluetooth: <small>${Bluetooth ? Bluetooth : 'No'}</small></li>
-                    <li>GPS: <small>${GPS ? GPS : 'No'}</small></li>
-                    <li>NFC: <small>${NFC ? NFC : 'No'}</small></li>
-                    <li>FM: <small>${Radio ? Radio : 'No'}</small></li>
-                    <li>USB: <small>${USB ? USB : 'No'}</small></li>
-                    <li>WLAN: <small>${WLAN ? WLAN : 'No'}</small></li>
+                    <li>Bluetooth: <small>${Bluetooth ? Bluetooth : 'Not available'}</small></li>
+                    <li>GPS: <small>${GPS ? GPS : 'Not available'}</small></li>
+                    <li>NFC: <small>${NFC ? NFC : 'Not available'}</small></li>
+                    <li>FM: <small>${Radio ? Radio : 'Not available'}</small></li>
+                    <li>USB: <small>${USB ? USB : 'Not available'}</small></li>
+                    <li>WLAN: <small>${WLAN ? WLAN : 'Not available'}</small></li>
                 </ul>
             </div>
         </div>
