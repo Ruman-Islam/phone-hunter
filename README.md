@@ -1,5 +1,5 @@
 # MobileHub.com
 
-#### Repository: https://github.com/programming-hero-web-course2/phone-hunter-Ruman-Islam
+#### Repository: https://github.com/Ruman-Islam/phone-hunter
 
 #### Website: https://phones-hub.netlify.app/
